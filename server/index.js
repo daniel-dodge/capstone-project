@@ -5,15 +5,13 @@ const cors = require('cors')
 
 app.use(express.json())
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'))
+    res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 app.get('/js', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/menus.js'))
-    rollbar.info("javascript file join success ")
+    res.sendFile(path.join(__dirname, '../public/menus.js'))
   })
 app.get('/styles', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.css'))
-    rollbar.info("css file join success ")
+    res.sendFile(path.join(__dirname, '../public/index.css'))
   })
 const port = process.env.PORT || 3000
 
