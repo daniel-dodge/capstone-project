@@ -9,16 +9,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/login.html'))
+    res.sendFile(path.join(__dirname, '../public/login.html'))
 })
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/signup.html'))
+    res.sendFile(path.join(__dirname, '../public/signup.html'))
 })
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/createlevel/index.html'))
+    res.sendFile(path.join(__dirname, '../createlevel/index.html'))
   })
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/browselevels/index.html'))
+    res.sendFile(path.join(__dirname, '../browselevels/index.html'))
   })
 app.get('/js', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/menus.js'))
