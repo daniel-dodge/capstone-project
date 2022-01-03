@@ -1,17 +1,18 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const path = require('path')
 // const {SERVER_PORT} = process.env
 
 app.use(express.json())
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'))
+    res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 app.get('/js', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/menus.js'))
+    res.sendFile(path.join(__dirname, '../public/menus.js'))
   })
 app.get('/styles', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.css'))
+    res.sendFile(path.join(__dirname, '../public/index.css'))
   })
 const port = process.env.PORT || 3000
 
