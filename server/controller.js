@@ -24,14 +24,13 @@ module.exports = {
         .catch(err => console.log(err))
     },
     checkExistingUser : (req,res) =>{
-        let {
-            username,
-            password
-        } = req.body
+        let {username} = req.body
         sequelize.query(`
         SELECT * FROM users
         WHERE user_username = '${username}';`)
-        .then(dbRes => res.status(200).send(dbRes[0]))
+        .then(dbRes => {
+            console.log(dbRes[0])
+            res.status(200).send(dbRes[0])})
         .catch(err => console.log(err))
     }
 }

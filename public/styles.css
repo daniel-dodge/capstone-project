@@ -201,3 +201,19 @@ width: 15vw
   filter:blur(4px);
   transition:1s;
 }
+#filter {
+  width:15vw;
+  height:35vh;
+  border:black 1px solid;
+}
+#game-container{
+  width:65vw;
+  height:60vh;
+  border:black 1px solid;
+}
+
+.browse-format{
+  display:flex;
+  justify-content:space-evenly;
+  margin-top:5vh
+}
