@@ -17,5 +17,8 @@ module.exports = {
             username,
             password
         } = req.body
+
+        .then(() => res.sendStatus(200))
+        .catch(err => console.log(err))
     }
 }
