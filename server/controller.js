@@ -28,9 +28,9 @@ module.exports = {
         sequelize.query(`
         SELECT * FROM users
         WHERE user_username = '${username}';`)
-        .then(dbRes => {
-            console.log(dbRes)
-            res.status(200).send(dbRes)})
+        .then(res => {
+            console.log(res.data)
+            res.status(200).send(res.data)})
         .catch(err => console.log(err))
     }
 }
