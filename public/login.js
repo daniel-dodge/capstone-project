@@ -11,6 +11,10 @@ const createUser = () => {
     if (retypePassInput.value === body.password){
     console.log("yeah")
     }
+
+    usernameInput.value = ""
+    passwordInput.value = ""
+    retypePassInput.value = ""
 }
 
 submitBtn.addEventListener("click", createUser)
