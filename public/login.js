@@ -20,7 +20,7 @@ const logIn = () => {
                     alert('cool they match')
                 } else {alert("Incorrect username or password")}
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log("line 22 catch"+err))
         } else{
             alert("Password should be at least 8 characters long")
         }
