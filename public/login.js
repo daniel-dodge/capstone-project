@@ -6,7 +6,7 @@ const submitBtn = document.querySelector(".submit")
 const createUser = () => {
     let body = {
         username: usernameInput.value,
-        password: passwordInput.value,
+        password: passwordInput.value
     }
     
     if (retypePassInput.value === body.password){
@@ -16,6 +16,7 @@ const createUser = () => {
             console.log("name length ok")
             if(body.password.length >= 8){
                 console.log("pass length ok")
+                console.log(body)
                 axios.post('/user', body)
                 .then(res => console.log("successful", res))
                 .catch(err => console.log(err))

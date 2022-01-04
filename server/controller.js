@@ -17,7 +17,9 @@ module.exports = {
             username,
             password
         } = req.body
-
+        sequelize.query(`
+        INSERT INTO USERS (user_username, user_password)
+        VALUES ('${username}','${password}')`)
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err))
     }
