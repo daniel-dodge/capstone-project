@@ -32,3 +32,5 @@ const logIn = () => {
     retypePassInput.value = ""
 
 }
+
+submitBtn.addEventListener("click", logIn)
