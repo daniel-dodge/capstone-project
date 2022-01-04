@@ -30,7 +30,7 @@ module.exports = {
         WHERE user_username = '${username}';`)
         .then(dbRes => {
             console.log(dbRes)
-            res.status(200).send(dbRes[0])})
+            res.status(200).send(dbRes)})
         .catch(err => console.log(err))
     }
 }
