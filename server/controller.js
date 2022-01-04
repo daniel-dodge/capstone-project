@@ -25,6 +25,7 @@ module.exports = {
     },
     checkExistingUser : (req,res) =>{
         let {username} = req.body
+        console.log(username)
         sequelize.query(`
         SELECT * FROM users
         WHERE user_username = '${username}';`)

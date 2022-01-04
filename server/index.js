@@ -34,7 +34,7 @@ app.get('/jslogin', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/login.js'))
 })
 
-app.get('/user', checkExistingUser)
+app.post('/login', checkExistingUser)
 app.post('/user', createNewUser)
 
 const port = process.env.PORT || 3000

@@ -2,22 +2,25 @@ const usernameInput = document.querySelector("#username-input")
 const passwordInput = document.querySelector("#pass-input")
 const submitBtn = document.querySelector(".submit")
 
-
 const logIn = () => {
     let body = {
         username : usernameInput.value,
         password: passwordInput.value
     }
+    console.log(body)
     if(body.username.length >= 7 && body.username.length <= 15){
         console.log("name length ok")
         if(body.password.length >= 8){
             console.log("pass length ok")
             // console.log(body)
-            axios.get('/user', body)
+            axios.post('/login', body)
             .then(res => {
-                console.log(res.data)
-                if (body.username === res.data.user_username && body.password === res.data.user_password){
+                let user = res.data[0]
+                let localUserData = [res.data[0].user_username,res.data[0].user_id]
+                //set user id onto local storage
+                if (body.username === user.user_username && body.password === user.user_password){
                     alert('cool they match')
+                    window.localStorage.setItem('user', JSON.stringify(localUserData))
                 } else {alert("Incorrect username or password")}
             })
             .catch(err => console.log("line 22 catch"+err))
