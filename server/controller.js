@@ -31,6 +31,7 @@ module.exports = {
         .then(res => {
             console.log(res.data)
             res.status(200).send(res.data)})
-        .catch(err => console.log(err))
+        .catch(err => {console.log(err)
+        console.log("kldjafkdsnvslk")})
     }
 }
