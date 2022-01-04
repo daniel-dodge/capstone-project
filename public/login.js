@@ -12,7 +12,7 @@ const logIn = () => {
         console.log("name length ok")
         if(body.password.length >= 8){
             console.log("pass length ok")
-            console.log(body)
+            // console.log(body)
             axios.get('/user', body)
             .then(res => {
                 console.log(res.data)
