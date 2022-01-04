@@ -18,9 +18,20 @@ module.exports = {
             password
         } = req.body
         sequelize.query(`
-        INSERT INTO USERS (user_username, user_password)
+        INSERT INTO users (user_username, user_password)
         VALUES ('${username}','${password}')`)
         .then(() => res.sendStatus(200))
+        .catch(err => console.log(err))
+    },
+    checkExistingUser : (req,res) =>{
+        let {
+            username,
+            password
+        } = req.body
+        sequelize.query(`
+        SELECT * FROM users
+        WHERE user_username = '${username}';`)
+        .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     }
 }
