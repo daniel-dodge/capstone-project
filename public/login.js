@@ -15,6 +15,7 @@ const logIn = () => {
             console.log(body)
             axios.get('/user', body)
             .then(res => {
+                console.log(res.data)
                 if (body.username === res.data.user_username && body.password === res.data.user_password){
                     alert('cool they match')
                 } else {alert("Incorrect username or password")}
@@ -29,7 +30,7 @@ const logIn = () => {
     
     usernameInput.value = ""
     passwordInput.value = ""
-    retypePassInput.value = ""
+
 
 }
 
