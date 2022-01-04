@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const path = require('path')
+const {createNewUser} = require("./controller.js")
 // const {SERVER_PORT} = process.env
 
 app.use(express.json())
@@ -29,6 +30,10 @@ app.get('/jslogin', (req, res) => {
 app.get('/styles', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/styles.css'))
   })
+
+
+app.post('/user', createNewUser)
+
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {

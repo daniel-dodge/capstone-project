@@ -5,11 +5,27 @@ const submitBtn = document.querySelector(".submit")
 
 const createUser = () => {
     let body = {
-        username: username.value,
-        password: password.value,
+        username: usernameInput.value,
+        password: passwordInput.value,
     }
+    
     if (retypePassInput.value === body.password){
-    console.log("yeah")
+    console.log("pass match")
+    console.log(body.username.length)
+        if(body.username.length >= 7 && body.username.length <= 15){
+            console.log("name length ok")
+            if(body.password.length >= 8){
+                console.log("pass length ok")
+                axios.post('/user', body)
+                .then()
+            } else{
+                alert("Password should be at least 8 characters long")
+            }
+        } else{
+            alert("Username should be at least 7-15 characters long")
+        }
+    } else {
+        alert("Passwords must match")
     }
 
     usernameInput.value = ""
