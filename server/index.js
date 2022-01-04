@@ -23,6 +23,9 @@ app.get('/createlevel', (req, res) => {
 app.get('/js', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/menus.js'))
   })
+app.get('/jslogin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/menus.js'))
+})
 app.get('/styles', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/styles.css'))
   })
