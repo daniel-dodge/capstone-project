@@ -10,15 +10,10 @@ const createUser = () => {
     }
     
     if (retypePassInput.value === body.password){
-    console.log("pass match")
-    console.log(body.username.length)
         if(body.username.length >= 7 && body.username.length <= 15){
-            console.log("name length ok")
             if(body.password.length >= 8){
-                console.log("pass length ok")
-                console.log(body)
                 axios.post('/user', body)
-                .then(res => console.log("successful", res))
+                .then(res => alert("Account succesfully created!"))
                 .catch(err => console.log(err))
             } else{
                 alert("Password should be at least 8 characters long")

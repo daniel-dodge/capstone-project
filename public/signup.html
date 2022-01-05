@@ -10,6 +10,11 @@
 
 </head>
 <body class ="user-body">
+    <section class = "hidden-sec">
+        <p>You must create a profile before creating a game.</p>
+        <button id = 'popup-button'>ok</button>
+    </section>
+    <section class= "all-elements">
     <header>
     <nav class = 'header-nav'>
         <h1 onclick="location.href='/';" id = "nav-title">MOUSE GAME</h1>
@@ -19,7 +24,7 @@
     <nav class = "header-nav">
 
 
-        <button class="nav-btns" onclick="location.href='/login';">log in</button>
+        <button class="nav-btns" onclick="location.href='/login';" id = "login">log in</button>
         <button class="nav-btns" onclick="location.href='/signup';">sign up</button>
 
     </nav>
@@ -45,6 +50,7 @@
             </div>
         </div>
         </section>
+    </section>
         <script src= "/js"></script>
         <script src= "menus.js"></script>
         <script src= "/jssignup"></script>

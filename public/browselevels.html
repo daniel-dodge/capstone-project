@@ -11,8 +11,8 @@
 </head>
 <body>
     <section class = "hidden-sec">
-        <p>yeah</p>
-        <button>ok</button>
+        <p id = "popup-text">You must create a profile before creating a game.</p>
+        <button id = 'popup-button'>ok</button>
     </section>
     <section class = "all-elements">
         <header>
@@ -22,13 +22,17 @@
                 <button class="nav-btns" onclick="location.href='./browselevels';">BROWSE LEVELS</button>    
             </nav>
                 <nav class = "header-nav">  
-                <button class="nav-btns" onclick="location.href='/login';">log in</button>
+                <button class="nav-btns" onclick="location.href='/login';" id = "login">log in</button>
                 <button class="nav-btns" onclick="location.href='/signup';">sign up</button>
             </nav>
         </header>
         <section class = "browse-format">
             <div id = "filter"></div>
-            <div id = "game-container"></div>
+            <div id = "game-container">
+                <div class = "game-box">
+                    
+                </div>
+            </div>
         </section>
     </section>
 <script src= "/js"></script>
