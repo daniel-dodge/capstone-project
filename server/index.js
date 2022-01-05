@@ -33,7 +33,12 @@ app.get('/styles', (req, res) => {
 app.get('/jslogin', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/login.js'))
 })
-
+app.get('/playgame', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/playgame.html'))
+})
+app.get('/jsgame', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/gamelogic.js'))
+})
 app.post('/login', checkExistingUser)
 app.post('/user', createNewUser)
 
