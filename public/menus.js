@@ -15,5 +15,5 @@ popUpBtn.addEventListener("click", showGameDiv)
 let userStuff = JSON.parse(window.localStorage.getItem('user'))
 if (Number.isFinite(userStuff[1])){
     loginBtn.textContent = `logged in as ${userStuff[0]}`
-    popUpText.textContent = "Nice."
+    popUpText.textContent = "IN THE WORKS"
 } 

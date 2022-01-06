@@ -1,7 +1,8 @@
 let gameDiv = document.querySelector("#game-container")
 let gameId = null
 const directGame = () => {
-window.localStorage.setItem('current-game', JSON.stringify(localUserData))
+// window.localStorage.setItem('current-game', JSON.stringify(localUserData))
+// HOW GET GAME ID WITHOUT ANOTHER GET REQUEST
 window.location.replace('/playgame')
 }
 const getGames = () => {

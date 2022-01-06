@@ -176,15 +176,11 @@ width: 15vw
   font-size:50px;
 
 }
-.showCreate{
-  opacity:1 !important;
-  transition:1s
-}
 .hidden-sec{
   display:flex;
   position:fixed; 
-  opacity:0;
-  top:35%;
+  /* opacity:0; */
+  top:-50%;
   left:40%;
   background-color:white;
   z-index:50;
@@ -196,6 +192,10 @@ width: 15vw
   border: 1px solid black;
   box-shadow: 2px 10px 15px;
   flex-direction:column;
+}
+.showCreate{
+  top:35%;
+  transition:1s
 }
 .blur {
   filter:blur(4px);
