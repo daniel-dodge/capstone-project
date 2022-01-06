@@ -21,6 +21,7 @@ const getGames = () => {
         </h2>
         <h3>Total deaths:${game.total_deaths}</h3>
         <h3>Average pass rate:${((game.total_completions/game.total_deaths) * 100).toFixed(2)}%</h3>
+        <h3>Fastest Time:${game.game_record} by ${game.record_user}</h3>
         <button onclick="directGame()";">play</button>
         </div>`
         gameDiv.innerHTML += gameElem

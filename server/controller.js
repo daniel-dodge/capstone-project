@@ -63,5 +63,14 @@ module.exports = {
             console.log(dbRes[0])
             res.status(200).send(dbRes[0])})
         .catch(err => console.log(err))
+    },
+    getGameData : (req,res) => {
+        sequelize.query(`
+        SELECT * FROM games
+        WHERE game_id=1`)
+        .then(dbRes => {
+            res.status(200).send(dbRes[0])})
+            .catch(err => {console.log(err)})
+        
     }
 }

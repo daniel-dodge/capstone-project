@@ -2,16 +2,37 @@
 const c = document.getElementById("Canvas");
 const start = document.querySelector("#start")
 let ctx = c.getContext("2d");
+const gameDiv = document.querySelector('#game-data')
 const size=25
 let deaths=0
 let numcoins=0
 let spawn = null
+let computeSeconds = null
 let minute = 0;
 let second = 00;
 let millisecond = 0;
 let cron;
 let count = 0
 
+const getData = () => {
+    axios.get('/gamedata')
+    .then(res => {
+        res.data.forEach(game => {
+            console.log(game)
+            let gameElem = 
+            `
+            <h1>${game.game_name}
+            </h1>
+            <p>Made by ${game.game_username}</p>
+            <h3>Total deaths:${game.total_deaths}</h3>
+            <h3>Average pass rate:${((game.total_completions/game.total_deaths) * 100).toFixed(2)}%</h3>
+            <h3>Fastest Time:${game.game_record} by ${game.record_user}</h3>    
+            `
+        gameDiv.innerHTML = gameElem
+        computeSeconds = game.game_record
+        console.log(computeSeconds)
+    })})
+}
 function startTimer() {
     if (count === 0){
     cron = setInterval(() => { timer(); }, 10);
@@ -113,7 +134,6 @@ function collide(x,y) {
         }
         if (colliding(player_rect,block_rect) && blocks[i]['type']===3 && numcoins>=coins.length) {
             clearInterval(cron)
-            let computeSeconds = `4:05:293`
             let newSec = computeSeconds.replaceAll(':','')
             console.log(newSec)
             let compareNum = 0
@@ -134,6 +154,7 @@ function collide(x,y) {
 
         } else if (userNum < compareNum){
             alert("You beat the record!")
+            // axios.put('/game',)
         }
         enemies = []
         coins = []
@@ -346,4 +367,5 @@ const startGame = ()=>{
     
 
 }
+getData()
 start.addEventListener("click",startGame)
