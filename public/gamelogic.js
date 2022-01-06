@@ -163,7 +163,7 @@ function collide(x,y) {
                 }
                 axios.put('/game',body)
             } else {
-                
+
             }
         }
         enemies = []
@@ -354,6 +354,7 @@ function tick() {
 }
 
 const startGame = ()=>{
+    start.setAttribute('id','dissapear')
     axios.get('/game')
         .then(res => {
             res.data.forEach(a => {
