@@ -23,7 +23,7 @@ const logIn = () => {
                     window.localStorage.setItem('user', JSON.stringify(localUserData))
                 } else {alert("Incorrect username or password")}
             })
-            .catch(err => console.log("line 22 catch"+err))
+            .catch(err => console.log(err))
         } else{
             alert("Password should be at least 8 characters long")
         }

@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const path = require('path')
-const {createNewUser, checkExistingUser} = require("./controller.js")
+const {createNewUser, checkExistingUser, getDbGames} = require("./controller.js")
 // const {SERVER_PORT} = process.env
 
 app.use(express.json())
@@ -39,9 +39,12 @@ app.get('/playgame', (req, res) => {
 app.get('/jsgame', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/gamelogic.js'))
 })
+app.get('/browsegame', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/browse.js'))
+})
 app.post('/login', checkExistingUser)
 app.post('/user', createNewUser)
-
+app.get('/browse', getDbGames)
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {

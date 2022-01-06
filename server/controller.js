@@ -34,5 +34,14 @@ module.exports = {
             res.status(200).send(res2[0])})
         .catch(err => {console.log(err)
         console.log("kldjafkdsnvslk")})
+    },
+    getDbGames : (req,res) => {
+        sequelize.query(`
+        SELECT * FROM games
+        ORDER BY game_id DESC;`)
+        .then(dbRes => {
+            // console.log(dbRes[0])
+            res.status(200).send(dbRes[0])})
+        .catch(err => console.log(err))
     }
 }
