@@ -251,3 +251,16 @@ width: 15vw
 #game-body {
 display:flex;
 }
+.hidden-div{
+  /* position:absolute; */
+  height:fit-content;
+  width:fit-content;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background-color:blue;
+  z-index: 5;
+  /* opacity:0 */
+}
+

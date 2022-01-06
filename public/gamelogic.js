@@ -13,7 +13,7 @@ let second = 00;
 let millisecond = 0;
 let cron;
 let count = 0
-
+let userStuff = JSON.parse(window.localStorage.getItem('user'))
 const getData = () => {
     axios.get('/gamedata')
     .then(res => {
@@ -154,7 +154,17 @@ function collide(x,y) {
 
         } else if (userNum < compareNum){
             alert("You beat the record!")
-            // axios.put('/game',)
+            if (Number.isFinite(userStuff[1])){
+                let num = `${minute}:${second}:${millisecond}`
+                console.log(num)
+                let body = {
+                    time :num,
+                    user :userStuff[0]
+                }
+                axios.put('/game',body)
+            } else {
+                
+            }
         }
         enemies = []
         coins = []
