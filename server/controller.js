@@ -43,5 +43,25 @@ module.exports = {
             // console.log(dbRes[0])
             res.status(200).send(dbRes[0])})
         .catch(err => console.log(err))
+    }, loadGame : (req,res) => {
+        sequelize.query(`
+        SELECT * FROM gamedata
+        WHERE game_id = 1;
+
+        SELECT * from bigblockdata
+        WHERE game_id = 1;
+
+        SELECT * FROM blockdata
+        WHERE game_id=1;
+
+        SELECT * FROM enemydata
+        WHERE game_id=1;
+
+        SELECT * FROM coindata
+        WHERE game_id=1`)
+        .then(dbRes => {
+            console.log(dbRes[0])
+            res.status(200).send(dbRes[0])})
+        .catch(err => console.log(err))
     }
 }

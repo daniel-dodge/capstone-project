@@ -10,9 +10,13 @@ let minute = 0;
 let second = 00;
 let millisecond = 0;
 let cron;
+let count = 0
 
 function startTimer() {
+    if (count === 0){
     cron = setInterval(() => { timer(); }, 10);
+    count++
+    }
   }
   function timer() {
     if ((millisecond += 10) == 1000) {
@@ -47,6 +51,7 @@ function move(x) {
         // console.log(enemies[0]['xv'])
     } else if(x.keyCode == 40) {
         movedown=1
+        
     }
 }
 
@@ -302,7 +307,7 @@ function addenemy(x,y,xv,yv,minx=0,maxx=100,miny=0,maxy=100) {
 let enemies = []
 
 
-function addcoin(x,y) {
+function addCoin(x,y) {
 	coins.push({'x':x,'y':y,'collected':0})
 }
 
@@ -314,46 +319,31 @@ function tick() {
     draw()
     movePlayer()
     moveEnemies()
+    startTimer()
 }
 
 const startGame = ()=>{
-    let x = 0
-    addBlock(1,15,1)
-    addBlock(1,8,8)
-    addBlock(1,5,7)
-    addBlocks(1,0,0,4,0)
-    addBlock(1,18,2)
-    addBlocks(1,0,1,0,9)
-    addBlocks(1,1,9,8,9)
-    addBlocks(1,4,1,4,7)
-    addBlocks(1,8,7,17,7)
-    addBlocks(1,6,2,6,7)
-    addBlocks(1,7,2,15,2)
-    addBlocks(1,17,2,17,6)
-    addBlocks(1,15,0,23,0)
-    addBlocks(1,23,1,23,9)
-    addBlocks(1,19,9,22,9)
-    addBlocks(1,19,2,19,8)
-    addBlocks(2,1,1,3,8)
-    addBlocks(3,20,1,22,8)
-    addBlocks(0,4,8,7,8)
-    addBlocks(0,7,3,7,7)
-    addBlocks(0,7,3,15,6)
-    addBlocks(0,16,1,16,6)
-    addBlocks(0,17,1,19,1)
-    addenemy(7,3,2,0)
-    addenemy(16,4,-2,0)
-    addenemy(7,5,2,0)
-    addenemy(16,6,-2,0)
-    addcoin(11.5,4.5)
-    findSpawn(blocks)
+    axios.get('/game')
+        .then(res => {
+            res.data.forEach(a => {
+                if(a.bigblock_id){
+                    addBlocks(a.bigblock_type,a.x1,a.y1,a.x2,a.y2)
+                } else if( a.enemy_id){
+                    addenemy(a.enemy_x,a.enemy_y,a.enemy_xv,a.enemy_yv)
+                } else if (a.coin_id){
+                    addCoin(a.coin_x,a.coin_y)
+                } else if(a.block_id){
+                    addBlock(a.block_type,a.block_x,a.block_y)
+                } else if (a.gamedata_id){
+                    speed = a.speed
+                }
+            })
+            findSpawn(blocks)
+            setInterval(tick,10)
+            
+            player = {'x':spawn[0]*size,'y':spawn[1]*size}
+        })
     
-    player = {'x':spawn[0]*size,'y':spawn[1]*size}
-    startTimer()
-    if (x === 0){
-    setInterval(tick,10)
-    x++
-    console.log(x)
-    }
+
 }
 start.addEventListener("click",startGame)

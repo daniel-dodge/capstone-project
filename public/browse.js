@@ -1,5 +1,9 @@
 let gameDiv = document.querySelector("#game-container")
-
+let gameId = null
+const directGame = () => {
+window.localStorage.setItem('current-game', JSON.stringify(localUserData))
+window.location.replace('/playgame')
+}
 const getGames = () => {
     axios.get('/browse')
     
@@ -15,8 +19,8 @@ const getGames = () => {
         <p>${game.game_description}</p>
         </h2>
         <h3>Total deaths:${game.total_deaths}</h3>
-        <h3>Average deaths per game:${game.total_deaths/game.total_completions}</h3>
-        <button onclick="location.href='/playgame';">play</button>
+        <h3>Average pass rate:${((game.total_completions/game.total_deaths) * 100).toFixed(2)}%</h3>
+        <button onclick="directGame()";">play</button>
         </div>`
         gameDiv.innerHTML += gameElem
     })})
