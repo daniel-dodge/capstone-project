@@ -1,11 +1,41 @@
 
-let c = document.getElementById("Canvas");
+const c = document.getElementById("Canvas");
 const start = document.querySelector("#start")
 let ctx = c.getContext("2d");
-let size=25
+const size=25
 let deaths=0
 let numcoins=0
 let spawn = null
+let minute = 0;
+let second = 00;
+let millisecond = 0;
+let cron;
+
+function startTimer() {
+    cron = setInterval(() => { timer(); }, 10);
+  }
+  function timer() {
+    if ((millisecond += 10) == 1000) {
+      millisecond = 0;
+      second++;
+    }
+    if (second == 60) {
+      second = 0;
+      minute++;
+    }
+    if (minute == 9) {
+      alert("you have lost fastest time privileges because going any higher than 10 will break some code that i dont feel like fixing so sorry about that")
+      clearInterval(cron)
+
+    }
+    document.getElementById('minute').innerText = returnData(minute);
+    document.getElementById('second').innerText = returnData(second);
+    document.getElementById('millisecond').innerText = returnData(millisecond);
+  }
+  
+  function returnData(input) {
+    return input > 10 ? input : `0${input}`
+}
 function move(x) {
     if(x.keyCode == 39) {
         moveright=1
@@ -77,11 +107,32 @@ function collide(x,y) {
         	player['y']=y
         }
         if (colliding(player_rect,block_rect) && blocks[i]['type']===3 && numcoins>=coins.length) {
-        	alert('nice')
-            blocks = []
-            enemies = []
-            coins = []
-            
+            clearInterval(cron)
+            let computeSeconds = `4:05:293`
+            let newSec = computeSeconds.replaceAll(':','')
+            console.log(newSec)
+            let compareNum = 0
+            let userNum = (minute * 60) + (second) + (millisecond /1000)
+            if (newSec.length === 6){
+            compareNum += +(newSec[0])*60
+            compareNum += +(newSec[1]+newSec[2])
+            compareNum += +(newSec[3]+newSec[4]+newSec[5]) / 1000
+            console.log(compareNum)
+        } else if(newSec.length === 5){
+            compareNum += +(newSec[1])
+            compareNum += +(newSec[2]+newSec[3]+newSec[4]) / 1000
+        }
+        console.log(compareNum)
+        console.log(userNum)
+        if(userNum > compareNum){
+            alert('Nice! But can you beat the record?')
+
+        } else if (userNum < compareNum){
+            alert("You beat the record!")
+        }
+        enemies = []
+        coins = []
+        blocks = []
             // location.reload() cover canvas with try again screen and put this on
             
         }
@@ -234,7 +285,6 @@ let blocks=[]
 
 
 
-let spawnpoints = [[0,0],[size*2,size*2],[size*2,size*4],[size*1.5,size*2.5],[0,0]]
 
 let moveright=0
 let moveleft=0
@@ -299,6 +349,7 @@ const startGame = ()=>{
     addcoin(9.5,3.5)
     
     player = {'x':spawn[0]*size,'y':spawn[1]*size}
+    startTimer()
     if (x === 0){
     setInterval(tick,10)
     x++

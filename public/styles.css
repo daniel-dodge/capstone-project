@@ -193,7 +193,7 @@ width: 15vw
   align-items:center;
   width:15vw;
   height:30vh;
-  border: 2px solid black;
+  border: 1px solid black;
   box-shadow: 2px 10px 15px;
   flex-direction:column;
 }
