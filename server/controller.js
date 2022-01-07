@@ -38,6 +38,7 @@ module.exports = {
     getDbGames : (req,res) => {
         sequelize.query(`
         SELECT * FROM games
+        WHERE game_completed = true
         ORDER BY game_id DESC;`)
         .then(dbRes => {
             // console.log(dbRes[0])

@@ -21,8 +21,14 @@ app.get('/createlevel', (req, res) => {
   app.get('/browselevels', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/browselevels.html'))
   })
+  app.get('/mygames', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/mygames.html'))
+  })
 app.get('/js', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/menus.js'))
+})
+app.get('/create', (req, res) => {
+   res.sendFile(path.join(__dirname, '../public/createlevel.js'))
   })
 app.get('/jssignup', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/signup.js'))

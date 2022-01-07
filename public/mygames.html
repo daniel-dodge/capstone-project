@@ -11,8 +11,8 @@
 </head>
 <body>
     <section class = "hidden-sec">
-                <section class = "action-sec">
-        <p id = "popup-text">You must create a profile before creating a game.</p>
+        <section class = "action-sec">
+            <p id = "popup-text">You must create a profile before creating a game.</p>
         </section>
         <button id = 'popup-button'>ok</button>
     </section>
@@ -23,22 +23,24 @@
                 <button class="nav-btns" id = "create-level-btn">CREATE LEVEL</button>
                 <button class="nav-btns" onclick="location.href='./browselevels';">BROWSE LEVELS</button>    
             </nav>
-                <nav class = "header-nav">  
+            <nav class = "header-nav">  
                 <button class="nav-btns" onclick="location.href='/login';" id = "login">log in</button>
                 <button class="nav-btns" onclick="location.href='/signup';">sign up</button>
             </nav>
         </header>
+        <h1 class = 'big-text' style = "color:white">work in progress :(</h1>
         <section class = "browse-format">
-            <!-- <div id = "filter"></div> -->
+            <div id = "filter"></div>
             <div id = "game-container">
-                <h1>Browse Games</h1>
-                <br>
+                <h1>Your games</h1>
+                
+                
             </div>
         </section>
     </section>
-<script src= "/js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src= "menus.js"></script>
-<script src="/browsegame"></script>
+    <script src= "/js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src= "menus.js"></script>
+    <!-- <script src="/browsegame"></script> -->
 </body>
 </html>

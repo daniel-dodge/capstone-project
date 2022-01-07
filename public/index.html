@@ -10,8 +10,12 @@
 </head>
 <body>
     <section class = "hidden-sec">
+        <section class = "action-sec">
+        
         <p id = "popup-text">You must create a profile before creating a game.</p>
-        <button id = 'popup-button'>ok</button>
+        
+        </section>
+        <button id = 'popup-button'>back</button>
     </section>
     <section class = "all-elements">
         <header>
@@ -32,12 +36,13 @@
             <div class = 'square' id = "flipped"></div>
             <section id = "center">
                 <div id = "title-card">
-                    <h1>Welcome To </h1>
-                    <h1 id="big-text">WORLDS HARDEST GAME</h1>
-                    <h1 id ="big-text">WORLD</h1>
+                    <h1 style = "font-size:1.6vw">Welcome To </h1>
+                    <h1 class="big-text">WORLDS HARDEST GAME</h1>
+                    <h1 class ="big-text bigger">WORLD</h1>
+                    <p style="font-size: 0.4vw; ">(kind of redundant, i know)</p>
                 </div>
-                <button class = "buttons">Create Level</button>
-                <button class = "buttons">Browse Levels</button>
+                <button class = "buttons" onclick="showGameDiv()">Create Level</button>
+                <button class = "buttons" onclick="location.href='/browselevels';">Browse Levels</button>
             </section>
             <div class = 'square'></div>
         </section>
