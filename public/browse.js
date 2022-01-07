@@ -2,9 +2,6 @@ let gameDiv = document.querySelector("#game-container")
 let gameId = null
 const directGame = (event) => {
 window.localStorage.setItem('current-game', event.target.parentNode.childNodes[11].textContent)
-// HOW GET GAME ID WITHOUT ANOTHER GET REQUEST
-// const playBtn
-// alert(event.target.parentNode.childNodes[11].textContent)
 
 window.location.replace('/playgame')
 }
