@@ -13,7 +13,6 @@ const getGames = () => {
     
     .then(res =>{
         res.data.forEach(game => {
-        console.log(game)
          let gameBox = document.createElement('div')
          gameBox.classList.add("game-box")
          gameBox.innerHTML = `

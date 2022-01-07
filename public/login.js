@@ -7,11 +7,11 @@ const logIn = () => {
         username : usernameInput.value,
         password: passwordInput.value
     }
-    console.log(body)
+    // console.log(body)
     if(body.username.length >= 7 && body.username.length <= 15){
-        console.log("name length ok")
+        // console.log("name length ok")
         if(body.password.length >= 8){
-            console.log("pass length ok")
+            // console.log("pass length ok")
             // console.log(body)
             axios.post('/login', body)
             .then(res => {

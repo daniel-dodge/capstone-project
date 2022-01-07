@@ -28,7 +28,7 @@ const getData = () => {
     axios.post('/gamedata',body)
     .then(res => {
         res.data.forEach(game => {
-            console.log(game);
+            
             let gameElem = 
             `
             <h1>${game.game_name}
@@ -42,7 +42,6 @@ const getData = () => {
         computeSeconds = game.game_record;
         totalDeaths = game.total_deaths
         completions = game.total_completions
-        console.log(computeSeconds);
     })})
 }
 function startTimer() {
@@ -81,7 +80,6 @@ function move(x) {
         moveleft=1
     } else if(x.keyCode == 38) {
         moveup=1
-        // console.log(enemies[0]['xv'])
     } else if(x.keyCode == 40) {
         movedown=1
         
@@ -111,7 +109,6 @@ function movePlayer() {
     if (moveup==1) {player['y']-=speed
 
     }
-// console.log(numcoins)
     if (movedown==1) {player['y']+=speed}
     collide(oldx,oldy)
 }
@@ -149,20 +146,16 @@ function collide(x,y) {
             stopInterval()
             c.setAttribute("id","byebye")
             let newSec = computeSeconds.replaceAll(':','')
-            console.log(newSec)
             let compareNum = 0
             let userNum = (minute * 60) + (second) + (millisecond /1000)
             if (newSec.length === 6){
                 compareNum += +(newSec[0])*60
                 compareNum += +(newSec[1]+newSec[2])
                 compareNum += +(newSec[3]+newSec[4]+newSec[5]) / 1000
-                console.log(compareNum)
             } else if(newSec.length === 5){
                 compareNum += +(newSec[1])
                 compareNum += +(newSec[2]+newSec[3]+newSec[4]) / 1000
             }
-            console.log(totalDeaths+deaths)
-            console.log(completions + 1)
             let dataBody ={
                 deaths : totalDeaths+deaths,
                 completions: completions + 1,
@@ -180,7 +173,7 @@ function collide(x,y) {
                 if (userStuff !== null){
                     secondText.textContent = "You also beat the record!"
                     let num = `${minute}:${second}:${millisecond}`
-                    console.log(num)
+                    
                 let body = {
                     time :num,
                     user :userStuff[0],
@@ -232,7 +225,6 @@ function collide(x,y) {
 function skip(lv) {
     numcoins=0
     findSpawn(blocks)
-    console.log(spawn)
     player['x']=spawn[0]*size
     player['y']=spawn[1]*size
     j=0
