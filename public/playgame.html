@@ -13,6 +13,11 @@
     <div class = "hidden-div">
         <canvas id="Canvas" width="600" height="400">
         </canvas>
+        <section id = game-text>
+            <h1 id = 'first-text'>Click start to play the game!</h1>
+            <p id ='second-text'>Can you beat the best time?</p>
+        </section>
+    </div>
         <section id = "interact-box">
             <p id='level'>Deaths: 0</p>
             <section>
@@ -20,11 +25,9 @@
             </section>
             <button id = 'start'>start</button>
         </section>
-    </div>
 
 </div>
 <section id = "game-data"></section>
-<!-- <button onClick='skip(2)'>Level 2</button><button onClick='skip(3)'>Level 3</button><button onClick='skip(4)'>Level 4</button> -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src = "gamelogic.js"></script>
 <script src = "/jsgame"></script>

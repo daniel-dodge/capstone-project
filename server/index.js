@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const path = require('path')
-const {createNewUser, checkExistingUser, getDbGames, loadGame, getGameData} = require("./controller.js")
+const {createNewUser, checkExistingUser, getDbGames, loadGame, getGameData, addNumbers, changeRecord} = require("./controller.js")
 // const {SERVER_PORT} = process.env
 
 app.use(express.json())
@@ -47,7 +47,8 @@ app.post('/user', createNewUser)
 app.get('/browse', getDbGames)
 app.get('/gamedata', getGameData)
 app.get('/game', loadGame)
-
+app.put('/total', addNumbers)
+app.put('/game', changeRecord)
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {

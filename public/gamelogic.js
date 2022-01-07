@@ -1,36 +1,46 @@
 
+
 const c = document.getElementById("Canvas");
-const start = document.querySelector("#start")
+const start = document.querySelector("#start");
+const hiddenDiv = document.querySelector(".hidden-div")
 let ctx = c.getContext("2d");
-const gameDiv = document.querySelector('#game-data')
-const size=25
-let deaths=0
-let numcoins=0
-let spawn = null
-let computeSeconds = null
+const gameDiv = document.querySelector('#game-data');
+const textSec = document.querySelector("#game-text")
+const firstText = document.querySelector("#first-text")
+const secondText = document.querySelector("#second-text")
+const size=25;
+let deaths=0;
+let numcoins=0;
+let spawn = null;
+let computeSeconds = null;
+let nTervId;
 let minute = 0;
 let second = 00;
 let millisecond = 0;
 let cron;
-let count = 0
-let userStuff = JSON.parse(window.localStorage.getItem('user'))
+let count = 0;
+let totalDeaths
+let completions
+let userStuff = JSON.parse(window.localStorage.getItem('user'));
 const getData = () => {
     axios.get('/gamedata')
     .then(res => {
         res.data.forEach(game => {
-            console.log(game)
+            console.log(game);
             let gameElem = 
             `
             <h1>${game.game_name}
             </h1>
-            <p>Made by ${game.game_username}</p>
+            <h1>Made by ${game.game_username}</h1>
             <h3>Total deaths:${game.total_deaths}</h3>
             <h3>Average pass rate:${((game.total_completions/game.total_deaths) * 100).toFixed(2)}%</h3>
             <h3>Fastest Time:${game.game_record} by ${game.record_user}</h3>    
-            `
-        gameDiv.innerHTML = gameElem
-        computeSeconds = game.game_record
-        console.log(computeSeconds)
+            `;
+        gameDiv.innerHTML = gameElem;
+        computeSeconds = game.game_record;
+        totalDeaths = game.total_deaths
+        completions = game.total_completions
+        console.log(computeSeconds);
     })})
 }
 function startTimer() {
@@ -38,7 +48,7 @@ function startTimer() {
     cron = setInterval(() => { timer(); }, 10);
     count++
     }
-  }
+  };
   function timer() {
     if ((millisecond += 10) == 1000) {
       millisecond = 0;
@@ -134,42 +144,54 @@ function collide(x,y) {
         }
         if (colliding(player_rect,block_rect) && blocks[i]['type']===3 && numcoins>=coins.length) {
             clearInterval(cron)
+            stopInterval()
+            c.setAttribute("id","byebye")
             let newSec = computeSeconds.replaceAll(':','')
             console.log(newSec)
             let compareNum = 0
             let userNum = (minute * 60) + (second) + (millisecond /1000)
             if (newSec.length === 6){
-            compareNum += +(newSec[0])*60
-            compareNum += +(newSec[1]+newSec[2])
-            compareNum += +(newSec[3]+newSec[4]+newSec[5]) / 1000
-            console.log(compareNum)
-        } else if(newSec.length === 5){
-            compareNum += +(newSec[1])
-            compareNum += +(newSec[2]+newSec[3]+newSec[4]) / 1000
-        }
-        console.log(compareNum)
-        console.log(userNum)
-        if(userNum > compareNum){
-            alert('Nice! But can you beat the record?')
-
-        } else if (userNum < compareNum){
-            alert("You beat the record!")
-            if (Number.isFinite(userStuff[1])){
-                let num = `${minute}:${second}:${millisecond}`
-                console.log(num)
+                compareNum += +(newSec[0])*60
+                compareNum += +(newSec[1]+newSec[2])
+                compareNum += +(newSec[3]+newSec[4]+newSec[5]) / 1000
+                console.log(compareNum)
+            } else if(newSec.length === 5){
+                compareNum += +(newSec[1])
+                compareNum += +(newSec[2]+newSec[3]+newSec[4]) / 1000
+            }
+            console.log(totalDeaths+deaths)
+            console.log(completions + 1)
+            let dataBody ={
+                deaths : totalDeaths+deaths,
+                completions: completions + 1
+            }
+            axios.put('/total',dataBody)
+            .then(res => console.log(1, res))
+            .catch(err => console.log(err))
+            textSec.setAttribute('id','redisplay')
+            if(userNum > compareNum){
+                firstText.textContent = "You won!"
+                secondText.textContent = "Can you beat the record?"
+            } else if (userNum < compareNum){
+                firstText.textContent ="You won!"
+                if (Number.isFinite(userStuff[1])){
+                    secondText.textContent = "You also beat the record!"
+                    let num = `${minute}:${second}:${millisecond}`
+                    console.log(num)
                 let body = {
                     time :num,
                     user :userStuff[0]
                 }
                 axios.put('/game',body)
+                .then(res => console.log(1, res))
+                .catch(err => console.log(err))
             } else {
-
+                secondText.textContent = "You also beat the record! If only you had an account."
             }
         }
         enemies = []
         coins = []
         blocks = []
-            // location.reload() cover canvas with try again screen and put this on
             
         }
         i++
@@ -352,8 +374,18 @@ function tick() {
     moveEnemies()
     startTimer()
 }
-
+const interval = ()=>{
+    if (!nTervId){
+    nIntervId = setInterval(tick,10)
+    }
+}
+const stopInterval = () => {
+    clearInterval(nIntervId);
+    nIntervId = null;
+}
 const startGame = ()=>{
+    c.setAttribute("class","redisplay")
+    textSec.setAttribute('id','dissapear')
     start.setAttribute('id','dissapear')
     axios.get('/game')
         .then(res => {
@@ -371,11 +403,11 @@ const startGame = ()=>{
                 }
             })
             findSpawn(blocks)
-            setInterval(tick,10)
+            interval()
             
             player = {'x':spawn[0]*size,'y':spawn[1]*size}
         })
-    
+        
 
 }
 getData()

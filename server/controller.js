@@ -72,5 +72,23 @@ module.exports = {
             res.status(200).send(dbRes[0])})
             .catch(err => {console.log(err)})
         
+    },
+    addNumbers : (req,res)=>{
+        console.log(req.body.deaths, req.body.completions)
+        sequelize.query(`
+        UPDATE games SET total_deaths = ${req.body.deaths},
+        total_completions = ${req.body.completions}
+        WHERE game_id=1;`)
+        .then(() => res.sendStatus(200))
+        .catch(err => console.log(err))
+    },
+    changeRecord : (req,res)=>{
+        console.log(req.body.time, req.body.user)
+        sequelize.query(`
+        UPDATE games SET game_record = '${req.body.time}',
+        record_user = '${req.body.user}'
+        WHERE game_id=1;`)
+        .then(() => res.sendStatus(200))
+        .catch(err => console.log(err))
     }
 }
