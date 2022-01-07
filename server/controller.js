@@ -39,7 +39,7 @@ module.exports = {
         sequelize.query(`
         SELECT * FROM games
         WHERE game_completed = true
-        ORDER BY game_id DESC;`)
+        ORDER BY game_id ASC;`)
         .then(dbRes => {
             // console.log(dbRes[0])
             res.status(200).send(dbRes[0])})
