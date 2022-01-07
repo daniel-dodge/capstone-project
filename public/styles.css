@@ -211,13 +211,13 @@ width: 15vw
   position:fixed; 
   /* opacity:0; */
   top:-500px;
-  left:40%;
+  left:38%;
   background-color:white;
   z-index:50;
   transition:0.5s;
   justify-content:space-evenly;
   align-items:center;
-  width:15vw;
+  width:25vw;
   height:30vh;
   border: 1px solid black;
   box-shadow: 2px 10px 15px;
