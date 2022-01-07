@@ -174,7 +174,7 @@ function collide(x,y) {
                 secondText.textContent = "Can you beat the record?"
             } else if (userNum < compareNum){
                 firstText.textContent ="You won!"
-                if (Number.isFinite(userStuff[1])){
+                if (userStuff !== null){
                     secondText.textContent = "You also beat the record!"
                     let num = `${minute}:${second}:${millisecond}`
                     console.log(num)
