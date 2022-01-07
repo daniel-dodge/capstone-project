@@ -19,8 +19,9 @@ const logIn = () => {
                 let localUserData = [res.data[0].user_username,res.data[0].user_id]
                 //set user id onto local storage
                 if (body.username === user.user_username && body.password === user.user_password){
-                    alert('cool they match')
+                    alert('You have successfully logged in!')
                     window.localStorage.setItem('user', JSON.stringify(localUserData))
+                    window.location.replace('/')
                 } else {alert("Incorrect username or password")}
             })
             .catch(err => console.log(err))

@@ -45,8 +45,8 @@ app.get('/browsegame', (req, res) => {
 app.post('/login', checkExistingUser)
 app.post('/user', createNewUser)
 app.get('/browse', getDbGames)
-app.get('/gamedata', getGameData)
-app.get('/game', loadGame)
+app.post('/gamedata', getGameData)
+app.post('/game', loadGame)
 app.put('/total', addNumbers)
 app.put('/game', changeRecord)
 const port = process.env.PORT || 3000

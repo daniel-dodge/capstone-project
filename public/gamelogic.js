@@ -8,6 +8,7 @@ const gameDiv = document.querySelector('#game-data');
 const textSec = document.querySelector("#game-text")
 const firstText = document.querySelector("#first-text")
 const secondText = document.querySelector("#second-text")
+let gameId = JSON.parse(window.localStorage.getItem('current-game'))
 const size=25;
 let deaths=0;
 let numcoins=0;
@@ -23,7 +24,8 @@ let totalDeaths
 let completions
 let userStuff = JSON.parse(window.localStorage.getItem('user'));
 const getData = () => {
-    axios.get('/gamedata')
+    let body = {gameid:gameId}
+    axios.post('/gamedata',body)
     .then(res => {
         res.data.forEach(game => {
             console.log(game);
@@ -163,7 +165,8 @@ function collide(x,y) {
             console.log(completions + 1)
             let dataBody ={
                 deaths : totalDeaths+deaths,
-                completions: completions + 1
+                completions: completions + 1,
+                gameid : gameId
             }
             axios.put('/total',dataBody)
             .then(res => console.log(1, res))
@@ -180,7 +183,8 @@ function collide(x,y) {
                     console.log(num)
                 let body = {
                     time :num,
-                    user :userStuff[0]
+                    user :userStuff[0],
+                    gameid : gameId
                 }
                 axios.put('/game',body)
                 .then(res => console.log(1, res))
@@ -387,7 +391,8 @@ const startGame = ()=>{
     c.setAttribute("class","redisplay")
     textSec.setAttribute('id','dissapear')
     start.setAttribute('id','dissapear')
-    axios.get('/game')
+    let body = {gameid : gameId}
+    axios.post('/game',body)
         .then(res => {
             res.data.forEach(a => {
                 if(a.bigblock_id){

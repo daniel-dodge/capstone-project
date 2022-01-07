@@ -44,50 +44,53 @@ module.exports = {
             res.status(200).send(dbRes[0])})
         .catch(err => console.log(err))
     }, loadGame : (req,res) => {
+        let {gameid} = req.body
+        // console.log(gameid)
         sequelize.query(`
         SELECT * FROM gamedata
-        WHERE game_id = 1;
+        WHERE game_id = ${gameid};
 
         SELECT * from bigblockdata
-        WHERE game_id = 1;
+        WHERE game_id = ${gameid};
 
         SELECT * FROM blockdata
-        WHERE game_id=1;
+        WHERE game_id=${gameid};
 
         SELECT * FROM enemydata
-        WHERE game_id=1;
+        WHERE game_id=${gameid};
 
         SELECT * FROM coindata
-        WHERE game_id=1`)
+        WHERE game_id=${gameid}`)
         .then(dbRes => {
-            console.log(dbRes[0])
+            // console.log(dbRes[0])
             res.status(200).send(dbRes[0])})
         .catch(err => console.log(err))
     },
     getGameData : (req,res) => {
         sequelize.query(`
         SELECT * FROM games
-        WHERE game_id=1`)
+        WHERE game_id=${req.body.gameid}`)
         .then(dbRes => {
             res.status(200).send(dbRes[0])})
             .catch(err => {console.log(err)})
         
     },
     addNumbers : (req,res)=>{
-        console.log(req.body.deaths, req.body.completions)
+        console.log(req.body.gameid)
+        // console.log(req.body.deaths, req.body.completions)
         sequelize.query(`
         UPDATE games SET total_deaths = ${req.body.deaths},
         total_completions = ${req.body.completions}
-        WHERE game_id=1;`)
+        WHERE game_id=${req.body.gameid};`)
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err))
     },
     changeRecord : (req,res)=>{
-        console.log(req.body.time, req.body.user)
+        // console.log(req.body.time, req.body.user)
         sequelize.query(`
         UPDATE games SET game_record = '${req.body.time}',
         record_user = '${req.body.user}'
-        WHERE game_id=1;`)
+        WHERE game_id=${req.body.gameid};`)
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err))
     }
